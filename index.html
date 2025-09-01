@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Neodabble — Welcome</title>
+  <meta name="description" content="Neodabble: My journey, goals, and progress. Connect with me and join my path forward!" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg: #f0f8ff;
+      --primary: #1a73e8;
+      --primary-rgb: 26,115,232;
+      --secondary: #60a5fa;
+      --white: #ffffff;
+      --muted: #6b7280;
+      --text: #1f2937;
+      --border: #d1d5db;
+      --progress-bg: #e0f2fe;
+      --radius: 16px;
+      --glass: rgba(255,255,255,0.06);
+      --tooltip-bg: rgba(15,23,42,0.95);
+      --tooltip-color: #fff;
+    }
+    .dark-mode{
+      --bg: #0b1220;
+      --primary: #8ab4ff;
+      --primary-rgb: 138,180,255;
+      --secondary: #5b8def;
+      --white: #0f1724;
+      --muted: #9aa4b2;
+      --text: #e6eef8;
+      --border: #233142;
+      --progress-bg: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+      --tooltip-bg: rgba(255,255,255,0.08);
+      --tooltip-color: #0b1220;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html { scroll-behavior: smooth; }
+    body{
+      font-family:Inter,system-ui,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      transition: background .25s ease, color .25s ease;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    header{
+      padding:24px;
+      text-align:center;
+      background:var(--white);
+      box-shadow:0 2px 6px rgba(0,0,0,0.05);
+      transition: background .25s ease, box-shadow .25s ease;
+    }
+    header h1{font-size:32px;color:var(--primary)}
+    header p{color:var(--muted);margin-top:6px}
+
+    nav{margin:20px auto;text-align:center}
+    .nav-btn{
+      display:inline-block;margin:8px;padding:14px 26px;border-radius:var(--radius);
+      background:var(--primary);color:var(--white);font-weight:600;text-decoration:none;
+      transition:all .25s ease-in-out;box-shadow:0 6px 20px rgba(var(--primary-rgb),0.12);
+      border:0;
+    }
+    .nav-btn:hover{
+      transform:scale(1.06);
+      background:var(--secondary);
+      box-shadow:0 12px 30px rgba(var(--primary-rgb),0.20);
+    }
+
+    main{max-width:900px;margin:30px auto;padding:0 20px}
+
+    section{
+      background:var(--white);
+      padding:26px;
+      border-radius:var(--radius);
+      margin-bottom:28px;
+      box-shadow:0 6px 24px rgba(0,0,0,0.06);
+      transition: background .25s ease, box-shadow .25s ease, transform .18s;
+    }
+    section h2{font-size:24px;margin-bottom:12px;color:var(--primary)}
+    section p{line-height:1.6;color:var(--text)}
+
+    .progress-bar{
+      margin-top:12px;background:var(--progress-bg);
+      height:18px;border-radius:999px;overflow:hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .progress-bar div{
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      height:100%;width:0; /* animated on load */
+      transition: width 1.5s cubic-bezier(.22,.9,.3,1);
+    }
+    .progress-label{margin-top:6px;font-weight:700;color:var(--primary)}
+
+    /* Reusable button styles */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 16px;
+      border-radius:14px;
+      border:0;
+      cursor:pointer;
+      font-weight:600;
+      transition:transform .14s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .btn:focus{ outline:3px solid rgba(var(--primary-rgb),0.12); outline-offset:4px }
+
+    .btn.primary{
+      background:var(--primary);
+      color:var(--white);
+      box-shadow:0 8px 24px rgba(var(--primary-rgb),0.12);
+    }
+    .btn.primary:hover{
+      transform:translateY(-3px) scale(1.02);
+      box-shadow:0 18px 50px rgba(var(--primary-rgb),0.22);
+      background:var(--secondary);
+    }
+
+    .btn.ghost{
+      background:transparent;
+      color:var(--primary);
+      border:1px solid rgba(var(--primary-rgb),0.12);
+      box-shadow:none;
+    }
+    .btn.ghost:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 30px rgba(var(--primary-rgb),0.10);
+      color:var(--secondary);
+    }
+
+    /* Contact form fields */
+    form{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+    input,textarea{
+      padding:12px;border-radius:12px;border:1px solid var(--border);
+      font-size:15px;font-family:inherit;background:var(--white);color:var(--text);
+      transition:background .2s, border-color .2s, color .2s, box-shadow .12s;
+    }
+    input:focus, textarea:focus{
+      box-shadow:0 6px 20px rgba(var(--primary-rgb),0.08);
+      border-color:rgba(var(--primary-rgb),0.28);
+      outline:none;
+    }
+
+    /* Actions container (send + copy) */
+    .actions {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:6px;
+      flex-wrap:wrap;
+    }
+    @media (max-width:480px){
+      .actions { flex-direction:column; align-items:stretch; }
+      .actions .btn, .actions .copy-btn { width:100%; justify-content:center; }
+    }
+
+    /* Copy button: ghost in light, filled in dark */
+    .copy-btn{
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid rgba(var(--primary-rgb),0.12);
+      background:transparent;
+      color:var(--primary);
+      cursor:pointer;
+      font-weight:700;
+      transition:transform .12s ease, box-shadow .14s ease, background .14s;
+      position:relative; /* for tooltip */
+    }
+    .copy-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 28px rgba(var(--primary-rgb),0.12);
+      background:linear-gradient(90deg, rgba(var(--primary-rgb),0.06), rgba(var(--primary-rgb),0.02));
+      color:var(--secondary);
+    }
+
+    /* Dark-mode: make copy button filled and match primary */
+    .dark-mode .copy-btn{
+      background:var(--primary);
+      color:var(--white);
+      border:1px solid rgba(var(--primary-rgb),0.16);
+      box-shadow:0 10px 30px rgba(var(--primary-rgb),0.14);
+    }
+    .dark-mode .copy-btn:hover{
+      background:var(--secondary);
+      color:var(--white);
+      box-shadow:0 20px 60px rgba(var(--primary-rgb),0.22);
+    }
+
+    /* Tooltip styling (uses data-tooltip attr) */
+    .copy-btn::after{
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -10px) scale(.98);
+      bottom: calc(100% + 10px);
+      background: var(--tooltip-bg);
+      color: var(--tooltip-color);
+      padding:6px 8px;
+      border-radius:8px;
+      font-size:12px;
+      white-space:nowrap;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .12s ease, transform .12s ease;
+      box-shadow: 0 8px 26px rgba(2,6,23,0.32);
+      z-index:999;
+    }
+    .copy-btn:hover::after, .copy-btn:focus::after {
+      opacity:1;
+      transform: translate(-50%, -18px) scale(1);
+    }
+
+    footer{text-align:center;padding:16px;color:var(--muted);font-size:14px}
+
+    .toggle-btn{
+      position:fixed;top:16px;right:16px;width:44px;height:44px;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:50%;border:none;background:var(--primary);color:var(--white);
+      font-size:18px;cursor:pointer;z-index:9999;
+      box-shadow:0 8px 24px rgba(15,23,42,0.25);
+      transition:transform .12s ease, background .18s ease, box-shadow .18s ease;
+    }
+    .toggle-btn:hover{ transform:scale(1.08) }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Neodabble</h1>
+    <p>Welcome to my journey — Building step by step toward greatness</p>
+    <nav>
+      <a href="#goals" class="nav-btn">Goals</a>
+      <a href="#progress" class="nav-btn">Progress</a>
+      <a href="#contact" class="nav-btn">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="goals">
+      <h2>My Goals</h2>
+      <p>I aim to create innovative projects, and build something impactful for the world. Along the way, I want to connect with like-minded people and grow together.</p>
+    </section>
+
+    <section id="progress">
+      <h2>My Progress</h2>
+      <p>Currently, I am in progress. Step by step, I am moving closer to achieving my dreams.</p>
+      <div class="progress-bar" aria-hidden="true"><div id="progressFill"></div></div>
+      <div class="progress-label">10% — In Progress</div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <p>If you want to join me on this journey or collaborate, feel free to reach out!</p>
+
+      <!-- contact form: fields + actions (send + copy) -->
+      <form action="mailto:neodabble@gmail.com" method="post" enctype="text/plain" onsubmit="onSend(event)">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+
+        <div class="actions">
+          <button class="btn primary" id="sendBtn" type="submit">Send Message</button>
+
+          <!-- copy button has data-tooltip for the custom tooltip and aria-live for screen readers -->
+          <button
+            class="copy-btn"
+            id="copyEmail"
+            data-tooltip="Click to copy email"
+            aria-live="polite"
+            type="button"
+          >
+            📋 neodabble@gmail.com
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Neodabble — Built with curiosity and vision.
+  </footer>
+
+  <button class="toggle-btn" id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+
+  <script>
+    (function(){
+      const btn = document.getElementById('darkModeToggle');
+      const root = document.documentElement;
+
+      function applyTheme(theme){
+        if(theme === 'dark') root.classList.add('dark-mode');
+        else root.classList.remove('dark-mode');
+        btn.textContent = root.classList.contains('dark-mode') ? '☀️' : '🌙';
+      }
+
+      const saved = localStorage.getItem('theme');
+      if(saved){ applyTheme(saved); }
+      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){ applyTheme('dark'); }
+      else{ applyTheme('light'); }
+
+      btn.addEventListener('click', () => {
+        const isDark = root.classList.toggle('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        btn.textContent = isDark ? '☀️' : '🌙';
+      });
+
+      // Animate progress bar
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          document.getElementById('progressFill').style.width = "10%";
+        }, 120);
+      });
+
+      // Auto-update year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Copy email behavior with feedback
+      const copyBtn = document.getElementById('copyEmail');
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText("neodabble@gmail.com");
+          const prev = copyBtn.innerHTML;
+          copyBtn.innerHTML = "✅ Copied!";
+          copyBtn.disabled = true;
+          setTimeout(() => { copyBtn.innerHTML = prev; copyBtn.disabled = false; }, 1400);
+        } catch (err) {
+          alert("Could not copy — your browser blocked it. Email: neodabble@gmail.com");
+        }
+      });
+
+      // graceful handler for the mailto form (gives visual feedback)
+      window.onSend = function(ev){
+        const sendBtn = document.getElementById('sendBtn');
+        sendBtn.disabled = true;
+        sendBtn.textContent = 'Opening…';
+        setTimeout(()=>{ sendBtn.disabled = false; sendBtn.textContent = 'Send Message'; }, 1500);
+        // form will still try to open mail client (mailto)
+      };
+    })();
+  </script>
+</body>
+</html>
